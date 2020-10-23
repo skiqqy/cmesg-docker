@@ -11,8 +11,8 @@ EXPOSE 8200
 
 # Setup defualt access
 RUN export ADMIN_USER="admin" && export ADMIN_PASS="admin"
-RUN git clone https://github.com/skiqqy/cmesg && cd cmesg
-RUN make server
+RUN git clone https://github.com/skiqqy/cmesg
+RUN cd cmesg && make server
 RUN ln -s /cmesg/bin/cmesg /bin/cmesg
 
 # Finish Config file, rm the one created by the make file, and create a new one
