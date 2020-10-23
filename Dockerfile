@@ -1,6 +1,6 @@
 FROM alpine:latest
 RUN apk update
-RUN apk add curl git make gcc
+RUN apk add curl git make gcc libc-dev
 
 # Setup ports and paths
 ENV ADMIN_PATH=/cmesg/config
