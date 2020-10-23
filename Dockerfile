@@ -2,26 +2,18 @@ FROM alpine:latest
 RUN apk update
 RUN apk add curl git make gcc libc-dev
 
-# Setup ports and paths
-ENV PORT=8199
-ENV ADMIN_PORT=8200
+ENV ADMIN_USER=admin
+ENV ADMIN_PASS=admin
 
-#EXPOSE 8199
-#EXPOSE 8200
-EXPOSE $PORT
-EXPOSE $ADMIN_PORT
-
-# Setup defualt access
-RUN export ADMIN_USER="admin" && \
-	export ADMIN_PASS="admin" && \
-	export ADMIN_PATH=/cmesg/config
+EXPOSE 8199
+EXPOSE 8200
 
 RUN git clone https://github.com/skiqqy/cmesg
 RUN cd cmesg && make server
 RUN ln -s /cmesg/bin/cmesg /bin/cmesg
 
 # Finish Config file, rm the one created by the make file, and create a new one
-RUN rm /cmesg/config && echo "user $ADMIN_USER\npassw $ADMIN_PASS\nport $ADMIN_PORT\n" > /cmesg/config
+RUN rm /cmesg/config && echo "user $ADMIN_USER\npassw $ADMIN_PASS\nport 8200\n" > /cmesg/config
 
 ENTRYPOINT ["cmesg"]
-CMD ["-p", "$PORT", "-c", "/cmesg/config"]
+CMD ["-p", "8199", "-c", "/cmesg/config"]
