@@ -23,7 +23,7 @@ RUN cd cmesg && make server
 RUN ln -s /cmesg/bin/cmesg /bin/cmesg
 
 # Finish Config file, rm the one created by the make file, and create a new one
-RUN rm $ADMIN_PATH && echo "user $ADMIN_USER\npassw $ADMIN_PASS\nport $ADMIN_PORT\n" > $ADMIN_PATH
+RUN rm /cmesg/config && echo "user $ADMIN_USER\npassw $ADMIN_PASS\nport $ADMIN_PORT\n" > /cmesg/config
 
 ENTRYPOINT ["cmesg"]
 CMD ["-p", "$PORT", "-c", "/cmesg/config"]
