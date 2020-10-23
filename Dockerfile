@@ -14,9 +14,7 @@ EXPOSE $ADMIN_PORT
 # Setup defualt access
 RUN export ADMIN_USER="admin" && \
 	export ADMIN_PASS="admin" && \
-	export ADMIN_PATH=/cmesg/config && \
-	export PORT=8199 && \
-	export ADMIN_PORT=8200
+	export ADMIN_PATH=/cmesg/config
 
 RUN git clone https://github.com/skiqqy/cmesg
 RUN cd cmesg && make server
